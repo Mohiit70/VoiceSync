@@ -1,7 +1,29 @@
-// This is a simple JavaScript file for scripts.js
+function getContent() {
+    const editorContent = tinymce.get('mytextarea').getContent();
+    return editorContent;
+}
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    console.log("DOM fully loaded and parsed");
-    // Future client-side JavaScript will go here
+
+function sendAudioPromptToServer(blob) {
+    fetch('http://localhost:3000/upload-audio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/octet-stream'
+          },
+      body: blob
+  })
+  .then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json(); // Assuming the server responds with JSON
+  })
+  .then(data => {
+    let transcript = data.transcription;
+    console.log('Success:', transcript);   
+    //tempSendMessageForAudio(transcript);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
   });
-  
+  }
