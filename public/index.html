@@ -33,6 +33,7 @@
               },
               onSpeechEnd: (audio) => {                
                 const blob = new Blob([audio.buffer], { type: 'application/octet-stream' });
+                console.log(blob);
                 sendAudioPromptToServer(blob);
               },
               preSpeechPadFrames: 15,

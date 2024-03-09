@@ -20,7 +20,8 @@ function sendAudioPromptToServer(blob) {
   })
   .then(data => {
     let transcript = data.transcription;
-    console.log('Success:', transcript);   
+    console.log('Success:', transcript);
+    
     //tempSendMessageForAudio(transcript);
   })
   .catch((error) => {

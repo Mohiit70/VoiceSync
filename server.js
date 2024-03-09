@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import { OpenAI } from 'openai';
 import tmp from 'tmp';
 import  WavEncoder from 'wav-encoder';
+import fs from 'fs';
+
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 // Create an instance of Express
 const app = express();
 app.use(express.json());
+app.use('/upload-audio', express.raw({ type: 'application/octet-stream', limit: '50mb' }));
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,8 +30,6 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.post("/update-content", async(req, res) => {
     const {htmlContent, userPrompt} = req.body;
-
-
     const completion = await openai.chat.completions.create({
         messages: [{ role: "system", content: "You are a tool that receives two inputs: an html content and a prompt. You only respond with an updated html format that follows what the prompt says. If you are unable to make the changes just add \
         'did not undertand the instruction' message to the end of the html"}],
@@ -59,7 +61,8 @@ app.post("/upload-audio", async(req, res) => {
 
         // Call the transcription function on the temporary file
         try {
-        //const transcription = await transcribeAudio(path);
+        const transcription = await transcribeAudio(path);
+        //var transcription = "Test";
         
         // Send the transcription result back to the client
         res.status(200).send({transcription: transcription});
@@ -81,6 +84,22 @@ app.post("/upload-audio", async(req, res) => {
 
 
 }); 
+
+async function transcribeAudio(tmpObjName) {
+    let transcription;
+    try {
+      transcription = await openai.audio.transcriptions.create({
+        file: fs.createReadStream(tmpObjName),
+        model: "whisper-1",
+        response_format: "text"
+      });
+    } catch (error) {
+      console.error('Error during transcription:', error);
+      throw error; // Rethrow the error to handle it in the calling function
+    }
+  
+    return transcription;
+  }
 
 // Start the server
 app.listen(PORT, () => {
