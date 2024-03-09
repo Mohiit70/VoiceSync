@@ -14,6 +14,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const savedMessages =[{ role: "system", content: "You are a tool that receives two inputs: an html content and a user prompt. You are supposed to update the html according to the user prompt end respond with an updated html content. Output only plain text. Do not output markdown." }];
 
 
 
@@ -29,13 +30,16 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(join(__dirname, 'public')));
 
 app.post("/update-content", async(req, res) => {
-    const {htmlContent, userPrompt} = req.body;
+    const {prompt, html} = req.body;
+    savedMessages.push({role: "user", content: `user-prompt: ${prompt}, user-html: ${html}`});
     const completion = await openai.chat.completions.create({
-        messages: [{ role: "system", content: "You are a tool that receives two inputs: an html content and a prompt. You only respond with an updated html format that follows what the prompt says. If you are unable to make the changes just add \
-        'did not undertand the instruction' message to the end of the html"}],
+        messages: savedMessages,
         model: "gpt-4-0125-preview",
       });
-
+    const updatedContent = completion.choices[0].message.content;  
+    //save the messages
+    savedMessages.push(completion.choices[0].message);
+    res.status(200).send({updatedHTML: updatedContent});  
 });
 
 app.post("/upload-audio", async(req, res) => { 
