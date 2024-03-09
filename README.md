@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="/workspaces/VoiceSync/img/VoiceSync.png" width=300 height=300>
+<img src="https://raw.githubusercontent.com/Mohiit70/VoiceSync/main/img/VoiceSync.png" width=300 height=300>
 
 <h1>VoiceSync TinyMCE Plugin</h1>
 
