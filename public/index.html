@@ -33,8 +33,8 @@
             <form method="post" id="myform">
                 <textarea id="mytextarea">Hello, World!</textarea>
                 <div class="d-flex justify-content-center">
-                    <button id="microphoneButton" type="button" class="m-4 d-flex" onclick="toggleMicrophone()">
-                        Microphone off
+                    <button id="microphoneButton" type="button" class="m-4 d-flex">
+                        Microphone on
                     </button>
                 </div>
             </form>
@@ -77,12 +77,12 @@
               onSpeechStart: () => {
                 console.log("Speech start detected");
               },
-              onSpeechEnd: (audio) => {                
+              onSpeechEnd: (audio) => {       
+                console.log("Speech end detected");         
                 const blob = new Blob([audio.buffer], { type: 'application/octet-stream' });
                 sendAudioPromptToServer(blob);
               },
               preSpeechPadFrames: 15,
-              redemptionFrames: 15
             });
             myvad.start();
         }
