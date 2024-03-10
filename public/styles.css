@@ -1,10 +1,9 @@
 /* This is a simple CSS file for styles.css */
 
 body, html {
-    background-color: gainsboro;
+    background-color: rgb(243, 148, 148);
     height: 100%;
     margin: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
