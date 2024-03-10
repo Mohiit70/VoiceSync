@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Sync</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your custom CSS file -->
+    <script src="https://cdn.tiny.cloud/1/f5333sdbf4ft4iew6iu7z6f7kvbca4916j1itrfj59hpmsdg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.7/dist/bundle.min.js"></script>
+    <script>
+        tinymce.init(
+            {
+                selector: '#mytextarea',
+                content_style: 'body { text-align: left; }'
+            }
+        );
+
+        let isListening = false;
+        let recognition;
+
+        function toggleMicrophone() {
+            const microphoneButton = document.getElementById('microphoneButton');
+            if (!isListening) 
+            {
+                // Start listening
+                recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('mytextarea').value += transcript;
+                };
+                recognition.start();
+                microphoneButton.style.backgroundColor = 'red';
+                microphoneButton.style.color = 'white';
+                microphoneButton.innerText = 'Listening...';
+            }
+            else {
+                // Stop listening
+                recognition.stop();
+                microphoneButton.style.backgroundColor = 'black';
+                microphoneButton.style.color = 'white';
+                microphoneButton.innerText = 'Press to Speak';
+            }
+            isListening = !isListening;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="pl-3">
+            <img src="./img/voiceSync_logo.png" alt="Voice Sync Logo" class="logo">
+            <label class="label"> voice sync</label>
+        </div>
+    </header>
+    <main class="pl-3">
+        <form method="post" id="myform">
+            <textarea id="mytextarea">Hello, World!</textarea>
+        </form>
+        <button id="microphoneButton" onclick="toggleMicrophone()">
+            Press to Speak
+        </button>
+        <pre id="output-content" class="contentDumpBox"></pre>
+    </main>
+    <footer class="bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6 text-md-right">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-bar text-center">
+            <p>&copy; VoiceSync</p>
+        </div>
+    </footer>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
