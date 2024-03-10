@@ -1,6 +1,9 @@
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/Mohiit70/VoiceSync/main/img/VoiceSync.png" width=300 height=300>
+![multipleLanguages](https://github.com/Mohiit70/VoiceSync/assets/83210137/68cdad31-4b2c-425f-9997-f7aa5dd68130)
+![image](https://github.com/Mohiit70/VoiceSync/assets/83210137/42ef6504-6e87-4088-8a89-18eb1b6c5dd0)
+
 
 <h1>🎙️VoiceSync TinyMCE Plugin</h1>
 
