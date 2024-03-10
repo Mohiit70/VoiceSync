@@ -29,8 +29,6 @@ form {
 }
 
 #microphoneButton {
-  display: inline-block;
-  margin: 20px 0;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -39,7 +37,7 @@ form {
   color: white;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  margin-left: 150vh;
+  
 }
 
 #microphoneButton:hover {
@@ -47,12 +45,16 @@ form {
 }
 
 footer {
+  position: fixed; /* Fix the position of the footer */
+  bottom: 0; /* Align the footer at the bottom of the viewport */
+  left: 0; /* Align the footer to start from the left edge of the viewport */
+  width: 100%; /* Ensure the footer extends the full width of the viewport */
   background-color: #333;
   color: #fff;
   text-align: center;
   padding: 10px 0;
-  width: 100%;
 }
+
 label{
   font-style: italic;
   font-size: larger;
