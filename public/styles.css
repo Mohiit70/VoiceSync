@@ -1,15 +1,61 @@
-/* This is a simple CSS file for styles.css */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(90deg, #CDFFD8, #94B9FF);
+  font-family: Arial, sans-serif;
+  display: block;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+  min-height: 80vh; /* Change to min-height for full viewport height */
+}
 
-body, html {
-    background-color: rgb(243, 148, 148);
-    height: 100%;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-  }
+header {
+  padding: 10px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+main {
+  padding: 20px;
+}
+
+form {
+  max-width: 750px;
+  margin: 30px auto;
+}
+
+#microphoneButton {
+  display: inline-block;
+  margin: 20px 0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #94B9FF;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-left: 150vh;
+}
+
+#microphoneButton:hover {
+  background-color: #990000;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+label{
+  font-style: italic;
+  font-size: larger;
+  margin-left: 10px;
   
-  header {
-    text-align: center;
-  }
-  
+}
