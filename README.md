@@ -5,10 +5,10 @@
 <h1>🎙️VoiceSync TinyMCE Plugin</h1>
 
 </div>
-
-<img src="https://github.com/Mohiit70/VoiceSync/assets/83210137/68cdad31-4b2c-425f-9997-f7aa5dd68130" width="200" height="200">
-
-<img src="https://github.com/Mohiit70/VoiceSync/assets/83210137/42ef6504-6e87-4088-8a89-18eb1b6c5dd0" width="200" height="200">
+<div align="center">
+  <img src="https://github.com/Mohiit70/VoiceSync/assets/83210137/68cdad31-4b2c-425f-9997-f7aa5dd68130" width="200" height="200">
+  <img src="https://github.com/Mohiit70/VoiceSync/assets/83210137/42ef6504-6e87-4088-8a89-18eb1b6c5dd0" width="200" height="200">
+</div>
 
 VoiceSync is a groundbreaking plugin for TinyMCE that revolutionizes text editing with voice commands and customized typing capabilities. Powered by OpenAI, it enables seamless voice typing and advanced text manipulation within the TinyMCE rich text editor.
 
