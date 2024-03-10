@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Node App</title>
-<!-- Include Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script src="https://cdn.tiny.cloud/1/f5333sdbf4ft4iew6iu7z6f7kvbca4916j1itrfj59hpmsdg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.7/dist/bundle.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    tinymce.init({
-        selector: '#mytextarea',
-        height: 600,
-    });
-    
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Node App</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tiny.cloud/1/f5333sdbf4ft4iew6iu7z6f7kvbca4916j1itrfj59hpmsdg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.7/dist/bundle.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            height: 600,
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -27,21 +26,24 @@
                 <form method="post" id="myform" class="m-4">
                     <textarea id="mytextarea">Hello, World!</textarea>
                 </form>
+                <!-- Mic Toggle Button -->
+                <button id="toggle-mic" class="btn btn-primary">Disable Mic</button>
             </div>
             <div class="col-4">
                 <div class="notes m-4" id="saved-notes">           
                 </div>
             </div>
         </div>
-        
-
     </header>
     <script src="scripts.js"></script>
-    <script>        
+    <script>
+        let myvad;
+        let isMicActive = true; // Track the state of the microphone
+
         async function createVoiceDetector() {
-            const myvad = await vad.MicVAD.new({
+            myvad = await vad.MicVAD.new({
               onSpeechStart: () => {
-                console.log("Speech start detected")
+                console.log("Speech start detected");
               },
               onSpeechEnd: (audio) => {                
                 const blob = new Blob([audio.buffer], { type: 'application/octet-stream' });
@@ -49,11 +51,24 @@
               },
               preSpeechPadFrames: 15,
               redemptionFrames: 15
-            })
-            myvad.start()
-          }
+            });
+            myvad.start();
+        }
         createVoiceDetector();
 
+        document.getElementById('toggle-mic').addEventListener('click', function() {
+            if (isMicActive) {
+                myvad.pause(); // Pause VAD
+                this.textContent = 'Enable Mic'; // Change button text to indicate mic is disabled
+                isMicActive = false;
+            } else {
+                myvad.start(); // Start VAD
+                this.textContent = 'Disable Mic'; // Change button text to indicate mic is enabled
+                isMicActive = true;
+            }
+            this.classList.toggle('btn-primary');
+            this.classList.toggle('btn-secondary');
+        });
     </script>
 </body>
 </html>

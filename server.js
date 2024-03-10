@@ -18,7 +18,8 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const savedMessages =[{ role: "system", content: "You are a tool that receives two inputs: an html content and a user prompt. You are supposed to update the html according to the user prompt end respond with an updated html content. Output only plain text. Do not output markdown. If the user prompt does not have any instrucion, just add what they say to the end of the html, and respond with html." }];
+
+const savedMessages =[{ role: "system", content: "You are a tool that receives two inputs: an html content and a user prompt. You are supposed to update the html according to the user prompt and respond with an updated html content. Output only plain text. Do not output markdown. If the user prompt does not have any instrucion, just add what they say to the end of the html, and respond with html." }];
 
 const dbURI = 'mongodb+srv://'+process.env.MONGODB_USER+':'+process.env.MONGODB_KEY+'@cluster0.mjlk1.mongodb.net/voicesync';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -268,6 +269,9 @@ app.post("/upload-audio", async(req, res) => {
 
 
 }); 
+
+
+
 
 app.get("/get-notes", async(req, res) => {
   try{
