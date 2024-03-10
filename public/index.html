@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simple Node App</title>
+<!-- Include Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdn.tiny.cloud/1/f5333sdbf4ft4iew6iu7z6f7kvbca4916j1itrfj59hpmsdg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.7/dist/bundle.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
     tinymce.init({
-        selector: '#mytextarea'
+        selector: '#mytextarea',
+        height: 600,
     });
     
 </script>
@@ -18,11 +22,19 @@
 <body>
     <header>
         <h1>TinyMCE Quick Start Guide</h1>
-        <form method="post" id="myform">
-          <textarea id="mytextarea">Hello, World!</textarea>
-        </form>
-        <pre id="output-content" class="contentDumpBox">  
-        </pre>
+        <div class="row">
+            <div class="col-8">
+                <form method="post" id="myform" class="m-4">
+                    <textarea id="mytextarea">Hello, World!</textarea>
+                </form>
+            </div>
+            <div class="col-4">
+                <div class="notes m-4" id="saved-notes">           
+                </div>
+            </div>
+        </div>
+        
+
     </header>
     <script src="scripts.js"></script>
     <script>        
@@ -41,6 +53,7 @@
             myvad.start()
           }
         createVoiceDetector();
+
     </script>
 </body>
 </html>
