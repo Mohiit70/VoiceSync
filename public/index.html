@@ -25,21 +25,31 @@
     <header>
         <div class="pl-3">
             <img src="voiceSync_logo.png" alt="Voice Sync Logo" class="logo">
-            <label class="label"> voice sync</label>
+            <label class="label"> <h1>Voice Sync</h1></label>
         </div>
     </header>
-    <main class="pl-3">
-        <form method="post" id="myform">
-            <textarea id="mytextarea">Hello, World!</textarea>
-            <div class="d-flex">
-                <button id="microphoneButton" type="button" class="m-4 d-flex" onclick="toggleMicrophone()">
-                    Microphone off
-                </button>
-            </div>
-        </form>
+    <div class="row">
+        <div class="pl-3  col-8 editor">
+            <form method="post" id="myform">
+                <textarea id="mytextarea">Hello, World!</textarea>
+                <div class="d-flex justify-content-center">
+                    <button id="microphoneButton" type="button" class="m-4 d-flex" onclick="toggleMicrophone()">
+                        Microphone off
+                    </button>
+                </div>
+            </form>
+            <pre id="output-content" class="contentDumpBox"></pre>
+        </div>
 
-        <pre id="output-content" class="contentDumpBox"></pre>
-    </main>
+        <div class="col-4">
+            <div>
+                <h2>Saved Notes</h2>
+
+            </div>
+            <div class="notes m-4" id="saved-notes">           
+            </div>
+        </div>
+    </div>
 
 
     <footer class="bg-dark text-white">
